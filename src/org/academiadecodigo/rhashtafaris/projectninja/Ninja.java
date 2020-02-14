@@ -40,7 +40,15 @@ public class Ninja implements MouseHandler {
     }
 
     public void mouseClicked(MouseEvent var1) {
-        pos.ninjaPosition(var1.getX(), var1.getY());
-        ninjaStanding.translate(var1.getX() - ninjaStanding.getX(), var1.getY() - ninjaStanding.getY());
+
+        double mouseX = var1.getX();
+        double mouseY = var1.getY();
+
+        if (mouseX > 650) {
+            mouseX = 800;
+        }
+
+        pos.ninjaPosition(mouseX, mouseY);
+        ninjaStanding.translate(mouseX - ninjaStanding.getX(), mouseY - ninjaStanding.getY());
     }
 }

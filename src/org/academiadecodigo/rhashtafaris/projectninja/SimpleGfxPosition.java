@@ -56,7 +56,7 @@ public class SimpleGfxPosition extends LogicPosition{
     }
 
     public void ninjaPosition(double var1, double var2) {
-        //this.rectangle.translate(var1 - this.rectangle.getX(), var2 - this.rectangle.getY());
+        this.rectangle.translate(var1 - this.rectangle.getX(), var2 - this.rectangle.getY());
     }
 
     public void katanaPosition(double var1, double var2) {
