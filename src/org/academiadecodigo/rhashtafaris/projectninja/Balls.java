@@ -5,6 +5,7 @@ public class Balls {
     private int speed;
     private SimpleGfxGrid grid;
     private SimpleGfxPosition pos;
+    private MouseController mouseController;
 
     public Balls(SimpleGfxPosition pos) {
         this.pos = pos;
@@ -22,9 +23,13 @@ public class Balls {
         this.speed = ballType.getSpeed();
     }
 
-    public void slashed() {
-        this.pos.ellipseHide();
-    }
+    /*public boolean isClicked(){
+
+        if(pos.getCol() + 45 == mouseController. && pos.getRow() + 45 == mouseController.getNinjaY()) {
+            return true;
+        }
+        return false;
+    }*/
 
     public void gravity() {
 
@@ -36,6 +41,10 @@ public class Balls {
 
     public void reUse(){
         this.pos.ballsResetPos();
+    }
+
+    public void setMouseController(MouseController mouseController){
+        this.mouseController = mouseController;
     }
 
 }

@@ -17,8 +17,8 @@ public class Game {
     public Game(int cols, int rows, int delay) {
         this.delay = delay;
         this.grid = new SimpleGfxGrid(cols, rows);
-        balls = new Balls[25];
-        mouseController = new MouseController();
+        balls = new Balls[10];
+
     }
 
     public void init() {
@@ -26,19 +26,23 @@ public class Game {
         this.grid.init();
         this.grid.setMouseController(mouseController);
 
+        for (int i = 0; i < balls.length; i++) {
+
+            balls[i] = BallFactory.createBall(grid);
+            balls[i].setMouseController(mouseController);
+
+        }
+
         this.ninja = new Ninja(this.grid.makeNinjaGridPosition(325, 700));
         this.ninja.setGrid(this.grid);
         this.ninja.setmouseController(this.mouseController);
+
+        mouseController = new MouseController(ninja);
 
         this.katana = new Katana(this.grid.makeKatanaGridPosition(200, 200));
         this.katana.setGrid(this.grid);
         this.katana.setMouseController(this.mouseController);
 
-        for (int i = 0; i < balls.length; i++) {
-
-            balls[i] = BallFactory.createBall(grid);
-
-        }
     }
 
     public void start() throws InterruptedException {
@@ -63,26 +67,19 @@ public class Game {
 
         for (Balls ball : balls) {
 
+            //if(ball.isClicked()){
+              //  ball.reUse();
+               // continue;
+            //}
+
             ball.gravity();
-            System.out.println(ball.getPos().getRow());
 
             if (ball.getPos().getRow() >= 700) {
-                System.out.println("-----------------------------------------------asdasdasdasd---");
 
                 ball.reUse();
 
-                //ball.getPos().setPos(400, -400);
-                //System.out.println(ball.getPos().getCol());
             }
 
-            /*if (katana.getPos().equals(ball.getPos())) {
-
-                ball.slashed();
-                continue;
-
-            }
-
-             */
         }
     }
 }

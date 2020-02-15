@@ -63,9 +63,6 @@ public class SimpleGfxGrid {
 
     public SimpleGfxPosition makeNinjaGridPosition(int col, int row) {
 
-        mouseController.setNinjaX(col);
-        mouseController.setNinjaY(row);
-
         return new SimpleGfxPosition(col, row, this);
     }
 

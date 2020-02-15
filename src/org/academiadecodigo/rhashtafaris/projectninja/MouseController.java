@@ -15,11 +15,14 @@ public class MouseController implements MouseHandler {
 
     private SimpleGfxGrid grid;
     private Mouse mouse;
+    private Ninja ninja;
 
 
-    public MouseController(){
+    public MouseController(Ninja ninja){
+        this.ninja = ninja;
         initMouse();
     }
+
 
     public void initMouse() {
 
@@ -33,8 +36,7 @@ public class MouseController implements MouseHandler {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        this.ninjaX = (int) mouseEvent.getX();
-        this.ninjaY = (int) mouseEvent.getY();
+        ninja.setPos(mouseEvent.getX(), mouseEvent.getY());
         System.out.println(mouseEvent);
 
     }

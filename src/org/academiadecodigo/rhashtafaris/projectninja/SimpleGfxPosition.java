@@ -14,9 +14,9 @@ public class SimpleGfxPosition extends LogicPosition{
     //private Picture pictureKatana;
 
     public SimpleGfxPosition(SimpleGfxGrid grid) {
-        super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 18000)), grid);
+        super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 9000)), grid);
         this.grid = grid;
-        this.ellipse = new Ellipse((double)this.getCol(), (double)this.getRow(), (double)(30 * grid.getCellSize()), (double)(30 * grid.getCellSize()));
+        this.ellipse = new Ellipse((double)this.getCol(), (double)this.getRow(), (double)(45 * grid.getCellSize()), (double)(45 * grid.getCellSize()));
         this.ellipseShow();
         //this.pictureKatana = new Picture((double) this.getCol(), (double) this.getRow(), "Ninja/katana.png");
     }
@@ -35,7 +35,7 @@ public class SimpleGfxPosition extends LogicPosition{
     }
 
     public void ellipseShow() {
-        this.ellipse.setColor(Color.RED);
+        this.ellipse.setColor(Color.BLACK);
         this.ellipse.fill();
     }
 

@@ -20,6 +20,8 @@ public class Ninja {
     private SimpleGfxGrid grid;
     private Mouse mouse;
     private MouseController mouseController;
+    private double currentX;
+    private double currentY;
 
     public Ninja(SimpleGfxPosition pos) {
         this.ninjaStanding = new Picture((double)pos.getCol(), (double)pos.getRow(), "Ninja/ninjaStanding_Scale_test1.png");
@@ -27,6 +29,9 @@ public class Ninja {
         this.ninjaAfterSlash = new Picture((double)pos.getCol(),(double)pos.getRow(),"Ninja/ninjaFinalSlash_scale_2.png");
         this.ninjaStanding.draw();
         this.pos = pos;
+
+        this.currentY = pos.getRow();
+        this.currentX = pos.getCol();
     }
 
     public int getX() {
@@ -46,7 +51,11 @@ public class Ninja {
         int beforeCol = pos.getCol();
         int beforeRow = pos.getRow();
 
-        pos.ninjaPosition(mouseController.getNinjaX(), mouseController.getNinjaY());
+        int currentX = (int) this.currentX;
+        int currentY = (int) this.currentY;
+
+
+        pos.ninjaPosition(currentX, currentY);
 
         int afterCol = pos.getCol();
         int  afterRow = pos.getRow();
@@ -59,49 +68,8 @@ public class Ninja {
         this.mouseController = mouseController;
     }
 
-    /*public void initMouse() {
-        mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
-    }*7
-
-    /*public void mouseMoved(MouseEvent var1) {
-
-    }*/
-
-    /*public void setNinjaAfterSlash() {
-
-
-
-    }*/
-
-    /*public void mouseClicked(MouseEvent var1) {
-
-        double mouseX = var1.getX();
-        double mouseY = var1.getY();
-
-        if (mouseX > 650) {
-            mouseX = 650;
-        }
-
-        pos.ninjaPosition(mouseX, mouseY);
-        ninjaStanding.translate(mouseX - ninjaStanding.getX(), mouseY - ninjaStanding.getY());
-        ninjaStanding.delete();
-
-        try {
-            ninjaBeforeSlash.translate(mouseX - ninjaBeforeSlash.getX(), mouseY - ninjaBeforeSlash.getY());
-            ninjaBeforeSlash.draw();
-            Thread.sleep(5);
-            ninjaBeforeSlash.delete();
-            ninjaAfterSlash.translate(mouseX - ninjaAfterSlash.getX(), mouseY - ninjaAfterSlash.getY());
-            ninjaAfterSlash.draw();
-
-            ninjaAfterSlash.delete();
-            ninjaBeforeSlash.translate(mouseX - ninjaBeforeSlash.getX(), mouseY - ninjaBeforeSlash.getY());
-            ninjaBeforeSlash.draw();
-        } catch (InterruptedException ex) {
-            System.out.println("Vai-te foder!");
-        }
-
-
-    }*/
-
+    public void setPos(double x, double y) {
+        this.currentX = x;
+        this.currentY = y;
+    }
 }
