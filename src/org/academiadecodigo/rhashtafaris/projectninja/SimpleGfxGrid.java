@@ -10,6 +10,7 @@ public class SimpleGfxGrid {
     private int cols;
     private int rows;
     private int cellSize;
+    private MouseController mouseController;
 
     public SimpleGfxGrid(int cols, int rows) {
         this.cols = cols;
@@ -61,6 +62,10 @@ public class SimpleGfxGrid {
     }
 
     public SimpleGfxPosition makeNinjaGridPosition(int col, int row) {
+
+        mouseController.setNinjaX(col);
+        mouseController.setNinjaY(row);
+
         return new SimpleGfxPosition(col, row, this);
     }
 
@@ -68,12 +73,22 @@ public class SimpleGfxGrid {
         return new SimpleGfxPosition(col, row, this);
     }
 
+    /*public void setNinjaPosition(double ninjaX, double ninjaY, Ninja ninja){
+
+
+    }*/
+
     public int rowToY(int row) {
         return row * this.cellSize;
     }
 
     public int columnToX(int col) {
         return col * this.cellSize;
+    }
+
+    public void setMouseController(MouseController mouseController){
+
+        this.mouseController = mouseController;
     }
 
 }

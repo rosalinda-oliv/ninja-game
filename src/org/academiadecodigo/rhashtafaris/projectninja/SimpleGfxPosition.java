@@ -14,7 +14,7 @@ public class SimpleGfxPosition extends LogicPosition{
     //private Picture pictureKatana;
 
     public SimpleGfxPosition(SimpleGfxGrid grid) {
-        super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 18000)), grid);
+        super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 3000)), grid);
         this.grid = grid;
         this.ellipse = new Ellipse((double)this.getCol(), (double)this.getRow(), (double)(30 * grid.getCellSize()), (double)(30 * grid.getCellSize()));
         this.ellipseShow();
@@ -26,6 +26,7 @@ public class SimpleGfxPosition extends LogicPosition{
         this.grid = grid;
         //this.rectangle = new Rectangle((double)this.getCol(), (double)this.getRow(), (double)(25 * grid.getCellSize()), (double)(25 * grid.getCellSize()));
         this.rectangleShow();
+
     }
 
     public void rectangleShow() {
@@ -55,12 +56,19 @@ public class SimpleGfxPosition extends LogicPosition{
         this.ellipse.translate((double)(afterCol - beforeCol * this.grid.getCellSize()), (double)(afterRow - beforeRow * this.grid.getCellSize()));
     }
 
-    public void ninjaPosition(double var1, double var2) {
-        this.rectangle.translate(var1 - this.rectangle.getX(), var2 - this.rectangle.getY());
+    public void ninjaPosition(int ninjaX, int ninjaY) {
+
+        super.setPos(ninjaX, ninjaY);
+
     }
 
-    public void katanaPosition(double var1, double var2) {
-      // this.rectangle.translate(var1 - this.rectangle.getY(), var2 - this.rectangle.getY());
+    public void ballsRePos(){
+
+        int randomX = (int)(Math.random() * (double)(grid.getCols() - 40));
+        int randomY = (int) (Math.random() * (-2000 - 3000));
+
+      //super.setPos(randomX, randomY);
+      this.ellipse.translate(0, -100);
 
     }
 }

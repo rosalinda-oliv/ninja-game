@@ -14,10 +14,10 @@ public class Katana {
     private SimpleGfxGrid grid;
     private SimpleGfxPosition pos;
     private Picture katana;
-    private KatanaController controller;
+    private MouseController controller;
 
     public Katana(SimpleGfxPosition pos) {
-        this.katana = new Picture((double) pos.getCol(), (double) pos.getRow(), "Ninja/katana.png");
+        this.katana = new Picture((double) pos.getCol(), (double) pos.getRow(), "Ninja/cursor Katana_scale_2.png");
         this.katana.draw();
         this.pos = pos;
         new KatanaController();
@@ -43,16 +43,43 @@ public class Katana {
         this.grid = grid;
     }
 
-    public class KatanaController implements MouseHandler {
+    public void position(){
+
+        int mouseX = controller.getKatanaX();
+        int mouseY = controller.getKatanaY();
+
+        if(controller.getKatanaX() > 740) {
+            mouseX = 740;
+        }
+
+
+        if ((katana.getX() >= 0 && katana.getX() < grid.getWidth() ) &&
+                katana.getY() >= 0 && katana.getY() < grid.getHeight() ) {
+            katana.translate(mouseX - katana.getX(), mouseY - katana.getY());
+        }
+        if (katana.getX() > grid.getWidth()) {
+            x = grid.getWidth() >> 2;
+        }
+        if (katana.getY()> grid.getHeight()){
+            y = grid.getHeight() >> 2;
+        }
+    }
+
+    public void setMouseController(MouseController mouseController){
+
+        this.controller = mouseController;
+    }
+
+    public class KatanaController {
 
         private Mouse mouse;
 
         KatanaController() {
-            this.mouse = new Mouse(this);
-            initMouse();
+            //this.mouse = new Mouse(this);
+            //initMouse();
         }
 
-        void initMouse() {
+        /*void initMouse() {
             this.mouse.addEventListener(MouseEventType.MOUSE_CLICKED);
             this.mouse.addEventListener(MouseEventType.MOUSE_MOVED);
         }
@@ -71,8 +98,8 @@ public class Katana {
             double mouseX = var1.getX();
             double mouseY = var1.getY();
 
-            if(var1.getX() > 596) {
-                mouseX = 596;
+            if(var1.getX() > 740) {
+                mouseX = 740;
             }
 
 
@@ -101,5 +128,4 @@ public class Katana {
                 y = grid.getHeight() >> 2;
             }*/
         }
-    }
 }

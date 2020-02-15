@@ -33,4 +33,8 @@ public class Balls {
 
     }
 
+    public void reUse(){
+        this.pos.ballsRePos();
+    }
+
 }
