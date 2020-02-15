@@ -14,7 +14,7 @@ public class SimpleGfxPosition extends LogicPosition{
     //private Picture pictureKatana;
 
     public SimpleGfxPosition(SimpleGfxGrid grid) {
-        super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 3000)), grid);
+        super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 18000)), grid);
         this.grid = grid;
         this.ellipse = new Ellipse((double)this.getCol(), (double)this.getRow(), (double)(30 * grid.getCellSize()), (double)(30 * grid.getCellSize()));
         this.ellipseShow();
@@ -62,13 +62,17 @@ public class SimpleGfxPosition extends LogicPosition{
 
     }
 
-    public void ballsRePos(){
+    public void ballsResetPos(){
 
         int randomX = (int)(Math.random() * (double)(grid.getCols() - 40));
-        int randomY = (int) (Math.random() * (-2000 - 3000));
+        int randomY = (int) (Math.random() * (-2000 - 18000));
 
-      //super.setPos(randomX, randomY);
-      this.ellipse.translate(0, -100);
+        int beforeRow = getRow();
+        int beforeCol = getCol();
+
+        super.setPos(randomX, randomY);
+
+        ellipse.translate(randomX - beforeCol, randomY - beforeRow );
 
     }
 }

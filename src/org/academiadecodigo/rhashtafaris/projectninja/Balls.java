@@ -27,6 +27,7 @@ public class Balls {
     }
 
     public void gravity() {
+
         for(int i = 0; i < this.speed; ++i) {
             this.pos.implementGravity(this.speed);
         }
@@ -34,7 +35,7 @@ public class Balls {
     }
 
     public void reUse(){
-        this.pos.ballsRePos();
+        this.pos.ballsResetPos();
     }
 
 }

@@ -17,7 +17,7 @@ public class Game {
     public Game(int cols, int rows, int delay) {
         this.delay = delay;
         this.grid = new SimpleGfxGrid(cols, rows);
-        balls = new Balls[10];
+        balls = new Balls[25];
         mouseController = new MouseController();
     }
 
@@ -34,7 +34,7 @@ public class Game {
         this.katana.setGrid(this.grid);
         this.katana.setMouseController(this.mouseController);
 
-        for (int i = 0; i < balls.length ; i++) {
+        for (int i = 0; i < balls.length; i++) {
 
             balls[i] = BallFactory.createBall(grid);
 
@@ -47,7 +47,6 @@ public class Game {
         while (!gameEnd) {
 
             Thread.sleep(delay);
-
 
 
             ninja.position();
@@ -65,19 +64,25 @@ public class Game {
         for (Balls ball : balls) {
 
             ball.gravity();
+            System.out.println(ball.getPos().getRow());
 
-            /*ball.gravity();
+            if (ball.getPos().getRow() >= 700) {
+                System.out.println("-----------------------------------------------asdasdasdasd---");
 
-            if(ball.getPos().getRow() == 800) {
-               ball.getPos().setPos(400, - 400);
+                ball.reUse();
+
+                //ball.getPos().setPos(400, -400);
+                //System.out.println(ball.getPos().getCol());
+            }
+
+            /*if (katana.getPos().equals(ball.getPos())) {
+
+                ball.slashed();
                 continue;
-            }
-
-            if(katana.getPos().equals(ball.getPos())){
-
-                ball.slashed();*/
 
             }
+
+             */
         }
     }
 }
