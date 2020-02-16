@@ -26,12 +26,12 @@ public class Game {
     public void init() {
 
         this.grid.init();
-        this.grid.setMouseController(mouseController);
 
         for (int i = 0; i < balls.length; i++) {
 
             balls[i] = BallFactory.createBall(grid);
             balls[i].setMouseController(mouseController);
+            balls[i].setGrid(grid);
 
         }
 
@@ -44,7 +44,6 @@ public class Game {
         this.katana = new Katana(this.grid.makeKatanaGridPosition(200, 200));
         this.katana.setGrid(this.grid);
         mouseController = new MouseController(ninja, katana);
-        this.katana.setMouseController(this.mouseController);
 
         points.draw();
         points.grow(40, 40);

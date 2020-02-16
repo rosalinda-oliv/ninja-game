@@ -11,7 +11,6 @@ public class SimpleGfxGrid {
     private int cols;
     private int rows;
     private int cellSize;
-    private MouseController mouseController;
     private Picture background;
 
     public SimpleGfxGrid(int cols, int rows) {
@@ -45,17 +44,6 @@ public class SimpleGfxGrid {
         return this.canvas.getHeight();
     }
 
-    public int getX() {
-        return this.canvas.getX();
-    }
-
-    public int getY() {
-        return this.canvas.getY();
-    }
-
-    public int getPadding() {
-        return 30;
-    }
 
     public int getCellSize() {
         return this.cellSize;
@@ -78,18 +66,5 @@ public class SimpleGfxGrid {
 
 
     }*/
-
-    public int rowToY(int row) {
-        return row * this.cellSize;
-    }
-
-    public int columnToX(int col) {
-        return col * this.cellSize;
-    }
-
-    public void setMouseController(MouseController mouseController){
-
-        this.mouseController = mouseController;
-    }
 
 }

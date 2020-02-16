@@ -51,9 +51,4 @@ public class Balls {
         this.mouseController = mouseController;
     }
 
-    public void hide() {
-
-        this.pos.slash();
-
-    }
 }

@@ -11,34 +11,13 @@ public class Katana {
     private int x;
     private int y;
     private SimpleGfxGrid grid;
-    private SimpleGfxPosition pos;
     private Picture katana;
-    private MouseController controller;
+
+
 
     public Katana(SimpleGfxPosition pos) {
         this.katana = new Picture((double) pos.getCol(), (double) pos.getRow(), "Ninja/cursor Katana_scale_2.png");
         this.katana.draw();
-        this.pos = pos;
-    }
-
-    public SimpleGfxPosition getPos() {
-        return this.pos;
-    }
-
-    public void slash() {
-
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setPos(int col, int row){
-        this.pos.setPos(col, row);
     }
 
     public void setGrid(SimpleGfxGrid grid) {
@@ -65,11 +44,6 @@ public class Katana {
         if (katana.getY()> grid.getHeight()){
             y = grid.getHeight() >> 2;
         }
-    }
-
-    public void setMouseController(MouseController mouseController){
-
-        this.controller = mouseController;
     }
 
 }
