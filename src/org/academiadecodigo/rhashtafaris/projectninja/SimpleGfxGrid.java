@@ -19,7 +19,7 @@ public class SimpleGfxGrid {
         this.rows = rows;
         this.cellSize = 1;
         this.canvas = new Rectangle(0.0D, 0.0D, (double)(cols * this.cellSize), (double)(rows * this.cellSize));
-        this.background = new Picture(0.0D,-50D,"Ninja/fundo_scale_2.png");
+        this.background = new Picture(0.0D,-50D,"Ninja/fundo_scale_3.png");
 
     }
 

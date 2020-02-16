@@ -65,6 +65,10 @@ public class Ninja {
         int currentX = (int) ninjaX;
         int currentY = (int) ninjaY;
 
+        if(currentX > 650) {
+            currentX = 650;
+        }
+
 
         pos.ninjaPosition(currentX - 50, currentY - 50);
 
@@ -135,14 +139,6 @@ public class Ninja {
         this.mouseController = mouseController;
     }
 
-
-    public void setPos(double x, double y) {
-        if(x > 600) {
-            x = 600;
-        }
-        this.currentX = x;
-        this.currentY = y;
-    }
 
 
 }

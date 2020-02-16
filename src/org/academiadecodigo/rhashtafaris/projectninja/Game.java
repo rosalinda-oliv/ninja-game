@@ -1,9 +1,10 @@
 package org.academiadecodigo.rhashtafaris.projectninja;
 
+import org.academiadecodigo.simplegraphics.graphics.Text;
+
 public class Game {
 
     private int time = 0;
-    private int points = 0;
     private int delay;
     private Ninja ninja;
     private Level level;
@@ -11,12 +12,15 @@ public class Game {
     private Katana katana;
     private Balls[] balls;
     private MouseController mouseController;
+    private Text points;
+    private int score;
 
     public Game(int cols, int rows, int delay) {
         this.delay = delay;
         this.grid = new SimpleGfxGrid(cols, rows);
-        balls = new Balls[25];
-
+        balls = new Balls[20];
+        points= new Text(400,  150, "0" );
+        score = 0;
     }
 
     public void init() {
@@ -42,6 +46,10 @@ public class Game {
         mouseController = new MouseController(ninja, katana);
         this.katana.setMouseController(this.mouseController);
 
+        points.draw();
+        points.grow(40, 40);
+
+
     }
 
     public void start() throws InterruptedException {
@@ -56,6 +64,7 @@ public class Game {
             //ninjaGravity();
 
             ballGravity();
+            this.points.setText(""+ score);
         }
     }
 
@@ -83,12 +92,19 @@ public class Game {
     public void checkPosition() {
         for (int i = 0; i < balls.length; i++) {
 
+
             if ((ninja.getPos().getRow() + 40 >= balls[i].getPos().getRow()
                     && ninja.getPos().getRow() + 40 <= (balls[i].getPos().getRow()+45)
                     && (ninja.getPos().getCol() + 40 >= balls[i].getPos().getCol()
                     && ninja.getPos().getCol() + 40 <= (balls[i].getPos().getCol()+45)))){
-                balls[i].hide();
-                //katana.setPos(400,1000);
+                balls[i].reUse();
+
+                System.out.println("ha pois é");
+
+                score++;
+
+
+
             }
         }
     }

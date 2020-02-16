@@ -16,13 +16,13 @@
     </target>
 
     <target name="prepare" description="Creates the build and classes directories" depends="init">
-
         <mkdir dir="${classes.dir}"/>
     </target>
 
     <target name="compile" description="compile the source code" depends="prepare">
-
-        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+            <classpath refid="classpath"/>
+        </javac>
     </target>
 
     <target name="jarfile" description="Archive the code" depends="compile">
@@ -30,15 +30,13 @@
         <jar destfile="${build.dir}/${project.name}.jar" basedir="${classes.dir}">
 
             <manifest>
-
                 <attribute name="Main-Class" value="${main.class}"/>
                 <attribute name="Class-Path" value="${lib.dir} ${resources.dir}"/>
-
             </manifest>
 
             <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
-            <fileset dir=".">
 
+            <fileset dir=".">
                 <include name="**/${resources.dir}/**"/>
             </fileset>
         </jar>
@@ -46,7 +44,7 @@
 
     <target name="clean" description="Clean up" depends="init">
 
-        <delete dir="${build.dir}" />
+        <delete dir="${build.dir}"/>
 
     </target>
 

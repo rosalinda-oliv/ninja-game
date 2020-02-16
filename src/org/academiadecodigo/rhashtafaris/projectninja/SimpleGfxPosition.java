@@ -17,12 +17,12 @@ public class SimpleGfxPosition extends LogicPosition{
     private Picture cannonBall;
 
     public SimpleGfxPosition(SimpleGfxGrid grid) {
-        super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 9000)), grid);
+        super((int)(Math.random() * (double)(grid.getCols() - 150)), (int) (Math.random() * (-2000 - 9000)), grid);
         this.grid = grid;
         this.ellipse = new Ellipse((double)this.getCol(), (double)this.getRow(), (double)(45 * grid.getCellSize()), (double)(45 * grid.getCellSize()));
         //this.ellipseShow();
         //this.pictureKatana = new Picture((double) this.getCol(), (double) this.getRow(), "Ninja/katana.png");
-        this.cannonBall = new Picture((double)this.getCol(), (double)this.getRow(),"Ninja/Cannon_Ball_scale_1.png");
+        this.cannonBall = new Picture((double)this.getCol(), (double)this.getRow(),"Ninja/canonBall_scale_2.png");
         this.cannonBall.draw();
         this.cannonBall.grow(-50,-50);
     }
@@ -81,14 +81,19 @@ public class SimpleGfxPosition extends LogicPosition{
     }
 
     public void slash(){
-        this.cannonBall.delete();
+        try{
+
+            this.cannonBall.delete();
+        }catch (ConcurrentModificationException e){
+            System.out.println("Still untaught on thread synchronization");
+        }
     }
 
 
 
     public void ballsResetPos(){
 
-        int randomX = (int)(Math.random() * (double)(grid.getCols() - 40));
+        int randomX = (int)(Math.random() * (double)(grid.getCols() - 150));
         int randomY = (int) (Math.random() * (-2000 - 9000));
 
         int beforeRow = getRow();
