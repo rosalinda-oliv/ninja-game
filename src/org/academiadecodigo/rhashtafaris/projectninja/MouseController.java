@@ -1,5 +1,9 @@
 package org.academiadecodigo.rhashtafaris.projectninja;
 
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.mouse.Mouse;
 import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
 import org.academiadecodigo.simplegraphics.mouse.MouseEventType;
@@ -8,21 +12,17 @@ import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 public class MouseController implements MouseHandler {
 
 
-    private int ninjaX;
-    private int ninjaY;
     private int katanaX;
     private int katanaY;
-
-    private SimpleGfxGrid grid;
     private Mouse mouse;
     private Ninja ninja;
+    private Katana katana;
 
-
-    public MouseController(Ninja ninja){
+    public MouseController(Ninja ninja, Katana katana){
+        this.katana = katana;
         this.ninja = ninja;
         initMouse();
     }
-
 
     public void initMouse() {
 
@@ -36,26 +36,20 @@ public class MouseController implements MouseHandler {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        ninja.setPos(mouseEvent.getX(), mouseEvent.getY());
-        System.out.println(mouseEvent);
+
+        ninja.setPosition(mouseEvent.getX(), mouseEvent.getY());
+
+        ninja.slash();
 
     }
 
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
 
-        katanaX = (int) mouseEvent.getX();
-        katanaY = (int) mouseEvent.getY();
+        katana.setPosition(mouseEvent.getX(), mouseEvent.getY());
 
     }
 
-    public int getNinjaX(){
-        return ninjaX;
-    }
-
-    public int getNinjaY(){
-        return ninjaY;
-    }
 
     public int getKatanaX(){
         return katanaX;
@@ -65,11 +59,4 @@ public class MouseController implements MouseHandler {
         return katanaY;
     }
 
-    public void setNinjaX(int ninjaX) {
-        this.ninjaX = ninjaX;
-    }
-
-    public void setNinjaY(int ninjaY){
-        this.ninjaY = ninjaY;
-    }
 }

@@ -6,19 +6,25 @@ import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
+
 public class SimpleGfxPosition extends LogicPosition{
 
     private Ellipse ellipse;
     //private Rectangle rectangle;
     private SimpleGfxGrid grid;
     //private Picture pictureKatana;
+    private Picture cannonBall;
 
     public SimpleGfxPosition(SimpleGfxGrid grid) {
         super((int)(Math.random() * (double)(grid.getCols() - 40)), (int) (Math.random() * (-2000 - 9000)), grid);
         this.grid = grid;
         this.ellipse = new Ellipse((double)this.getCol(), (double)this.getRow(), (double)(45 * grid.getCellSize()), (double)(45 * grid.getCellSize()));
-        this.ellipseShow();
+        //this.ellipseShow();
         //this.pictureKatana = new Picture((double) this.getCol(), (double) this.getRow(), "Ninja/katana.png");
+        this.cannonBall = new Picture((double)this.getCol(), (double)this.getRow(),"Ninja/Cannon_Ball_scale_1.png");
+        this.cannonBall.draw();
+        this.cannonBall.grow(-50,-50);
     }
 
     public SimpleGfxPosition(int col, int row, SimpleGfxGrid grid) {
@@ -26,8 +32,8 @@ public class SimpleGfxPosition extends LogicPosition{
         this.grid = grid;
         //this.rectangle = new Rectangle((double)this.getCol(), (double)this.getRow(), (double)(25 * grid.getCellSize()), (double)(25 * grid.getCellSize()));
         this.rectangleShow();
-
     }
+
 
     public void rectangleShow() {
         //this.rectangle.setColor(Color.WHITE);
@@ -47,13 +53,25 @@ public class SimpleGfxPosition extends LogicPosition{
         this.ellipse.delete();
     }
 
-    public void implementGravity(int speed) {
+    public void ballImplementGravity(int speed) {
         int beforeRow = this.getRow();
         int beforeCol = this.getCol();
         super.implementGravity(speed);
         int afterRow = this.getRow();
         int afterCol = this.getCol();
-        this.ellipse.translate((double)(afterCol - beforeCol * this.grid.getCellSize()), (double)(afterRow - beforeRow * this.grid.getCellSize()));
+        try {
+
+            this.cannonBall.translate((double)(afterCol - beforeCol * this.grid.getCellSize()), (double)(afterRow - beforeRow * this.grid.getCellSize()));
+            this.ellipse.translate((double)(afterCol - beforeCol * this.grid.getCellSize()), (double)(afterRow - beforeRow * this.grid.getCellSize()));
+        }catch (ConcurrentModificationException e){
+            System.out.println("Still untaught on thread synchronization");
+        }catch (NullPointerException e){
+            System.out.println("Dont know what is wrong here, it works 80% of the time");
+        }
+    }
+
+    public void ninjaImplementGravity(int speed){
+        super.implementGravity(speed);
     }
 
     public void ninjaPosition(int ninjaX, int ninjaY) {
@@ -62,10 +80,16 @@ public class SimpleGfxPosition extends LogicPosition{
 
     }
 
+    public void slash(){
+        this.cannonBall.delete();
+    }
+
+
+
     public void ballsResetPos(){
 
         int randomX = (int)(Math.random() * (double)(grid.getCols() - 40));
-        int randomY = (int) (Math.random() * (-2000 - 18000));
+        int randomY = (int) (Math.random() * (-2000 - 9000));
 
         int beforeRow = getRow();
         int beforeCol = getCol();
@@ -73,6 +97,16 @@ public class SimpleGfxPosition extends LogicPosition{
         super.setPos(randomX, randomY);
 
         ellipse.translate(randomX - beforeCol, randomY - beforeRow );
+        cannonBall.translate(randomX - beforeCol, randomY - beforeRow );
 
     }
+
+    public boolean equals(SimpleGfxPosition pos){
+        return (pos.getRow() == super.getRow() && pos.getCol() == super.getCol());
+    }
+
+    public String toString(){
+        return getRow()+"-----"+getCol();
+    }
+
 }

@@ -2,6 +2,7 @@ package org.academiadecodigo.rhashtafaris.projectninja;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class SimpleGfxGrid {
 
@@ -11,18 +12,21 @@ public class SimpleGfxGrid {
     private int rows;
     private int cellSize;
     private MouseController mouseController;
+    private Picture background;
 
     public SimpleGfxGrid(int cols, int rows) {
         this.cols = cols;
         this.rows = rows;
         this.cellSize = 1;
         this.canvas = new Rectangle(0.0D, 0.0D, (double)(cols * this.cellSize), (double)(rows * this.cellSize));
+        this.background = new Picture(0.0D,-50D,"Ninja/fundo_scale_2.png");
 
     }
 
     public void init() {
         this.canvas.setColor(Color.ORANGE);
         this.canvas.fill();
+        this.background.draw();
     }
 
     public int getCols() {

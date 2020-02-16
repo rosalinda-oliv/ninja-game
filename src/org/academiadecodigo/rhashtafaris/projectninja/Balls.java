@@ -6,9 +6,13 @@ public class Balls {
     private SimpleGfxGrid grid;
     private SimpleGfxPosition pos;
     private MouseController mouseController;
+    private int x;
+    private int y;
 
     public Balls(SimpleGfxPosition pos) {
         this.pos = pos;
+        this.x = pos.getCol() -1;
+        this.y = pos.getRow() -1;
     }
 
     public void setGrid(SimpleGfxGrid grid) {
@@ -34,7 +38,7 @@ public class Balls {
     public void gravity() {
 
         for(int i = 0; i < this.speed; ++i) {
-            this.pos.implementGravity(this.speed);
+            this.pos.ballImplementGravity(this.speed);
         }
 
     }
@@ -47,4 +51,9 @@ public class Balls {
         this.mouseController = mouseController;
     }
 
+    public void hide() {
+
+        this.pos.slash();
+
+    }
 }

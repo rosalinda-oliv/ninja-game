@@ -1,7 +1,5 @@
 package org.academiadecodigo.rhashtafaris.projectninja;
 
-import static org.academiadecodigo.rhashtafaris.projectninja.BallFactory.createBall;
-
 public class Game {
 
     private int time = 0;
@@ -17,7 +15,7 @@ public class Game {
     public Game(int cols, int rows, int delay) {
         this.delay = delay;
         this.grid = new SimpleGfxGrid(cols, rows);
-        balls = new Balls[10];
+        balls = new Balls[25];
 
     }
 
@@ -33,14 +31,15 @@ public class Game {
 
         }
 
+
         this.ninja = new Ninja(this.grid.makeNinjaGridPosition(325, 700));
         this.ninja.setGrid(this.grid);
         this.ninja.setmouseController(this.mouseController);
 
-        mouseController = new MouseController(ninja);
 
         this.katana = new Katana(this.grid.makeKatanaGridPosition(200, 200));
         this.katana.setGrid(this.grid);
+        mouseController = new MouseController(ninja, katana);
         this.katana.setMouseController(this.mouseController);
 
     }
@@ -52,11 +51,9 @@ public class Game {
 
             Thread.sleep(delay);
 
+            checkPosition();
 
-            ninja.position();
-
-            katana.position();
-
+            //ninjaGravity();
 
             ballGravity();
         }
@@ -68,13 +65,13 @@ public class Game {
         for (Balls ball : balls) {
 
             //if(ball.isClicked()){
-              //  ball.reUse();
-               // continue;
+            //  ball.reUse();
+            // continue;
             //}
 
             ball.gravity();
 
-            if (ball.getPos().getRow() >= 700) {
+            if (ball.getPos().getRow() >= 800) {
 
                 ball.reUse();
 
@@ -82,4 +79,27 @@ public class Game {
 
         }
     }
+
+    public void checkPosition() {
+        for (int i = 0; i < balls.length; i++) {
+
+            if ((ninja.getPos().getRow() + 40 >= balls[i].getPos().getRow()
+                    && ninja.getPos().getRow() + 40 <= (balls[i].getPos().getRow()+45)
+                    && (ninja.getPos().getCol() + 40 >= balls[i].getPos().getCol()
+                    && ninja.getPos().getCol() + 40 <= (balls[i].getPos().getCol()+45)))){
+                balls[i].hide();
+                //katana.setPos(400,1000);
+            }
+        }
+    }
+
+
+    /*public void ninjaGravity(){
+
+        if(ninja.getPos().getRow() >= 750){
+            ninja.ninjaStand();
+        }
+
+        ninja.startGravity();
+    }*/
 }
